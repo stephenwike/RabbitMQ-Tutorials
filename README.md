@@ -24,10 +24,10 @@ This has to be running before any of the other test projects can work.
 Run the following commands in command or bash terminal.
 -----------------------------------------------------------------
 change directory to rabbitmq directory.
-`cd src/rabbitmq/`
+```cd src/rabbitmq/```
 
 load docker image of rabbitmq with docker compose.
-`docker-compose up -d`
+```docker-compose up -d```
 -----------------------------------------------------------------
 
 ## 1 HelloWorld
