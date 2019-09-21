@@ -23,7 +23,7 @@ function SendMessage() {
                 throw error1;
             }
 
-            var queue = 'hello';
+            var queue = 'workqueue';
 
             var msg = process.argv.slice(2).join(' ') || "Hello World!";
 

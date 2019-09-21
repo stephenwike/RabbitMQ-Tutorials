@@ -9,6 +9,7 @@
     "start-rabbitmq": "docker-compose -f ./src/0-rabbitmq/docker-compose.yaml up -d",
     "restart-rabbitmq": "npm run stop-rabbitmq && npm run start-rabbitmq",
     "send-1": "node ./src/1-hello-world/sender.js",
+    "send-2": "node ./src/2-work-queues/sender.js",
     "receive-1": "node ./src/1-hello-world/receiver.js"
   },
   "repository": {
