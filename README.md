@@ -4,7 +4,7 @@ Implementation of RabbitMQ following RabbitMQ tutorials
 This series of tutorials follows the javascript chain of tutorials from here:  
 https://www.rabbitmq.com/getstarted.html
 
-## Getting and Setting Up This Project:
+## Getting and Setting Up This Project:  
 Follow these instructions with command line or bash terminal.
 ===================================================================
 -------------------------------------------------------------------
