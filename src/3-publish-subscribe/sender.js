@@ -22,14 +22,14 @@ function SendMessage() {
             if (error1) {
                 throw error1;
             }
-    
-            var queue = 'hello';
-    
-            channel.assertQueue(queue, {
+
+            var exchange = "logs";
+
+            channel.assertExchange(exchange, "fanout", {
                 durable: false
             });
-            channel.sendToQueue(queue, Buffer.from(msg));
-    
+
+            channel.publish('logs', '', Buffer.from(msg));
             console.log(" [x] Sent %s", msg);
         });
         setTimeout(function () {
@@ -38,4 +38,3 @@ function SendMessage() {
         }, 500);
     });
 }
-

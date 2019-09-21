@@ -10,8 +10,10 @@
     "restart-rabbitmq": "npm run stop-rabbitmq && npm run start-rabbitmq",
     "send-1": "node ./src/1-hello-world/sender.js",
     "send-2": "node ./src/2-work-queues/sender.js",
+    "send-3": "node ./src/3-publish-subscribe/sender.js",
     "receive-1": "node ./src/1-hello-world/receiver.js",
-    "receive-2": "node ./src/2-work-queues/receiver.js"
+    "receive-2": "node ./src/2-work-queues/receiver.js",
+    "receive-3": "node ./src/3-publish-subscribe/receiver.js"
   },
   "repository": {
     "type": "git",

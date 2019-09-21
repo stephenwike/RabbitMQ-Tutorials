@@ -16,6 +16,7 @@ ______________________________________
     * https://docs.docker.com/docker-for-windows/install/
 ______________________________________
 ## Getting and Setting Up This Project
+##### Cloning the project from github and installing the dependencies with node-package-manager (npm).
 ______________________________________
 git the project with  
 `git clone https://github.com/stephenwike/RabbitMQ-Tutorials.git`
@@ -63,14 +64,13 @@ ______________________________________
 **project:** _./src/1-hello-world_
 ______________________________________
 
-To run the hello-world example, first run the sender.js  
+To run the hello-world example, first, run the receiver app to consume the message.  
+`npm run receive-1`
+
+ Run the sender.js  
 `npm run send-1`
 
 When prompted, type the message you would like to send to the receiver script and press enter.
-
-Run the receiver app to consumer the message.  
-`npm run receive-1`
-
 You will see the message you just sent from the sender script in the output from the receiver script.
 
 ##### An Explaination
@@ -102,11 +102,31 @@ You may notice a delay between when the tasks are received and when the tasks ar
 > **... (some delay)**  
 > _[x]_ _Done_  
 
+If we repeat the same experiment and kill one of the receiving terminals before it has a chance to finish processing the task, the task will be re-assigned to the other receiving terminal(s).  This is because acknowledge has been turned on.  Otherwise, incomplete tasks will be lost when the receiver closes.  The sender has _persistent_ set to _true_.  Otherwise, RabbitMQ will forget about the tasks it had in queue when restarted. 
+
+**Note:** _message persistence isn't strong and message can still be lost, if you absolutely cannot lose messages, use Publisher Confirms._ 
+_https://www.rabbitmq.com/confirms.html_
+
 ##### An Explaination
 > Explaination of what is happening here... (WIP)
 ______________________________________
 
-## 2 Publish Subscribe
-##### Example publish and subscribe pattern
-**project:** _./src/3-publish-subscribe_
+## 3 Publish Subscribe  
+##### Example publish and subscribe pattern  
+**project:** _./src/3-publish-subscribe_  
+______________________________________
+
+This project example will be run very similar to project 1-Hello-World with the major difference that the messages will now be sent to all subscribers.
+
+To run the publish-subscribe example, open at least two terminals and run the receiver script in each terminal.  
+`npm run receive-3`
+
+Open one new terminal and run the sender script
+`npm run send-3`
+
+When prompted, type the message you would like to send to the receiver script and press enter.
+You will see the message you just sent from the sender script in all the receiver script outputs.
+
+##### An Explaination
+> Explaination of what is happening here... (WIP)
 ______________________________________
