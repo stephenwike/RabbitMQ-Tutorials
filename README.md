@@ -97,10 +97,10 @@ The tasks are processed in parallel.
 You may notice a delay between when the tasks are received and when the tasks are processed.  
 
 **-output-**
-> _[x]_ _Received_ 'your message'
->  _Processing..._
-> **... (some delay)**
-> _[x]_ _Done_
+> _[x]_ _Received_ 'your message'  
+>  _Processing..._  
+> **... (some delay)**  
+> _[x]_ _Done_  
 
 ##### An Explaination
 > Explaination of what is happening here... (WIP)
