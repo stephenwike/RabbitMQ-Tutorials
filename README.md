@@ -1,7 +1,7 @@
 # RabbitMQ-Tutorials
 Implementation of RabbitMQ following RabbitMQ tutorials
 
-This series of tutorials follows the javascript chain of tutorials from here:
+This series of tutorials follows the javascript chain of tutorials from here:  
 https://www.rabbitmq.com/getstarted.html
 
 ## Getting and Setting Up This Project:
