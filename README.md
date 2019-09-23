@@ -1,4 +1,4 @@
-# RabbitMQ-Tutorials
+# RabbitMQ-Tutorials (WIP)
 #### Implementation of RabbitMQ following RabbitMQ tutorials (in javascript)
 
 This series of tutorials follows the javascript chain of tutorials from here:  
@@ -6,7 +6,7 @@ https://www.rabbitmq.com/getstarted.html
 
 ## Prerequesites
 ##### Check you have the following prerequisites before continuing.
-**Note:** _Tutorial created and ran from window 10 environment.  Project may need alterations for other environments_
+**Note:** _Tutorial created and ran from windows 10 environment.  Project may need alterations for other environments_
 ______________________________________
 1) Must have installed nodejs.
     * Download for nodejs can be found here:
@@ -116,16 +116,44 @@ ______________________________________
 **project:** _./src/3-publish-subscribe_  
 ______________________________________
 
-This project example will be run very similar to project 1-Hello-World with the major difference that the messages will now be sent to all subscribers.
-
 To run the publish-subscribe example, open at least two terminals and run the receiver script in each terminal.  
 `npm run receive-3`
 
-Open one new terminal and run the sender script
+Open one new terminal and run the sender script.  
 `npm run send-3`
 
 When prompted, type the message you would like to send to the receiver script and press enter.
 You will see the message you just sent from the sender script in all the receiver script outputs.
+
+##### An Explaination
+> Explaination of what is happening here... (WIP)
+______________________________________
+
+## 4 Routing
+##### Publishing to only specific queue(s).
+**project:** _./src/4-routing_  
+______________________________________
+
+To run the routing example, open at least two terminals and run the receiver script in each terminal.  
+`npm run receive-4`
+
+When prompted, enter either _route1_ or _route2_ and hit _enter_.  For this demo, make sure at least one terminal was entered with _route1_ and at least one was entered with _route2_.  This will bind _route1_ or _route2_ as a routing key for the queue that the receiver script creates.  These queues are already bound with the _all_ routing key.
+
+Open one new terminal and run the sender script.  
+`npm run send-4`
+
+The sender will immidiately send three direct messages.  One routing to _all_, one routing to _route1_, and one routing to _route2_.  You should see all reciever terminals display the message **this message is sent to queues with the routine key "all"**.  Receiver terminals specified with _route1_ will see **this message is sent to queues with the routine key "route1"** and receiver terminals specified with _route2_ will see **this message is sent to queues with the routine key "route2"**.
+
+##### An Explaination
+> Explaination of what is happening here... (WIP)
+______________________________________
+
+## 5 Topics
+##### Publishing to only specific queue(s).
+**project:** _./src/5-topics_
+______________________________________
+
+
 
 ##### An Explaination
 > Explaination of what is happening here... (WIP)
