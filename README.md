@@ -14,6 +14,7 @@ ______________________________________
 2) Must have docker installed and running
     * Information on installing and running docker can be found here:
     * https://docs.docker.com/docker-for-windows/install/
+    **Note:** _Used docker to run rabbitmq instead of installing rabbitmq dependencies locally.  To install rabbitmq locally instead, follow instructions here:_ _https://www.rabbitmq.com/install-windows.html_
 ______________________________________
 ## Getting and Setting Up This Project
 ##### Cloning the project from github and installing the dependencies with node-package-manager (npm).
