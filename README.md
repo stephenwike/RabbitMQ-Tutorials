@@ -33,14 +33,16 @@ ______________________________________
 ##### Here is a list of all npm scripts in this project.
 ______________________________________
 ```
-npm run [script]
+npm run <script>
 scripts:
         start-rabbitmq
         stop-rabbitmq
         restart-rabbitmq
-        send-[n]
+        send-<n>
             - where n is the project number
-        receive-[n]
+        receive-<n>
+            - where n is the project number
+        demo-<n>
             - where n is the project number
 ```
 ______________________________________

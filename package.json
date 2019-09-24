@@ -5,6 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
+    "cmd-send": "start cmd.exe /t:27 /k",
+    "cmd-receive": "start cmd.exe /t:47 /k",
     "stop-rabbitmq": "docker-compose -f ./src/0-rabbitmq/docker-compose.yaml down",
     "start-rabbitmq": "docker-compose -f ./src/0-rabbitmq/docker-compose.yaml up -d",
     "restart-rabbitmq": "npm run stop-rabbitmq && npm run start-rabbitmq",
@@ -15,7 +17,9 @@
     "receive-1": "node ./src/1-hello-world/receiver.js",
     "receive-2": "node ./src/2-work-queues/receiver.js",
     "receive-3": "node ./src/3-publish-subscribe/receiver.js",
-    "receive-4": "node ./src/4-routing/receiver.js"
+    "receive-4": "node ./src/4-routing/receiver.js",
+
+    "demo-1": "npm run cmd-send \"npm run send-1\" && npm run cmd-receive \"npm run receive-1\""
   },
   "repository": {
     "type": "git",

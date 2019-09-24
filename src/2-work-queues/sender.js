@@ -16,7 +16,7 @@ amqp.connect('amqp://localhost', function (error0, connection) {
         });
 
         for (var i = 1; i < 13; ++i) {
-            var msg = "This is tasj " + i + "!  This task will be processed by the receiver.";
+            var msg = "This is task " + i + "!  This task will be processed by the receiver.";
             channel.sendToQueue(queue, Buffer.from(msg), {
                 persistent: true
             });
