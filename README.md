@@ -90,14 +90,6 @@ Your message appears in the red console.
 
 Either repeat the process by continuing to enter messages or enter **'q'** to quit.
 
-
-
-The producing script asks for console input while the consuming script is actively waiting for messages from the queue.  Ent
-
-
-When prompted, type the message you would like to send to the receiver script and press enter.
-You will see the message you just sent from the sender script in the output from the receiver script.
-
 ##### An Explaination
 > The producing script creates a connection to RabbitMQ, creates a channel, creates a queue named 'hello', and prompts the user for a message.  The consuming script also creates a connection to RabbitMQ, creates a queue named 'hello', and consumes any messages that come through that queue.  It's important to note that queues are **idempotent**, which means they are only created once.  Notice both the consumer and producer create a queue named 'hello'.  The queue is only actually created by the script that tries to creates it first.  Both queues have to have matching queue arguments or RabbitMQ will raise an error.  Queue arguments will be covered in a later demo.  When a message is entered, the producer sends a message to the queue for the consumer to receive.  The application quits when a message of 'q' is entered.
 ______________________________________
