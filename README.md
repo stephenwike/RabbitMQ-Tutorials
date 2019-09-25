@@ -10,7 +10,7 @@ For a production ready checklist, refer to this article:
 _https://www.rabbitmq.com/production-checklist.html_
 
 ## Prerequesites
-##### Check you have the following prerequisites before continuing.  
+##### Check you have the following prerequisites before continuing.
 **Note:** _Tutorial created and ran from windows 10 environment.  Project may need alterations for other environments_
 ______________________________________
 1) Must have installed nodejs.
@@ -19,7 +19,7 @@ ______________________________________
 2) Must have docker installed and running
     * Information on installing and running docker can be found here:
     * https://docs.docker.com/docker-for-windows/install/
-    * Follow instructions for running the docker client.  
+    * Follow instructions for running the docker client.
     **Note:** _Used docker to run rabbitmq instead of installing rabbitmq dependencies locally.  To install rabbitmq locally instead, follow instructions here:_ _https://www.rabbitmq.com/install-windows.html_
 ______________________________________
 ## Getting and Setting Up This Project
@@ -90,6 +90,14 @@ Your message appears in the red console.
 
 Either repeat the process by continuing to enter messages or enter **'q'** to quit.
 
+
+
+The producing script asks for console input while the consuming script is actively waiting for messages from the queue.  Ent
+
+
+When prompted, type the message you would like to send to the receiver script and press enter.
+You will see the message you just sent from the sender script in the output from the receiver script.
+
 ##### An Explaination
 > The producing script creates a connection to RabbitMQ, creates a channel, creates a queue named 'hello', and prompts the user for a message.  The consuming script also creates a connection to RabbitMQ, creates a queue named 'hello', and consumes any messages that come through that queue.  It's important to note that queues are **idempotent**, which means they are only created once.  Notice both the consumer and producer create a queue named 'hello'.  The queue is only actually created by the script that tries to creates it first.  Both queues have to have matching queue arguments or RabbitMQ will raise an error.  Queue arguments will be covered in a later demo.  When a message is entered, the producer sends a message to the queue for the consumer to receive.  The application quits when a message of 'q' is entered.
 ______________________________________
@@ -99,33 +107,30 @@ ______________________________________
 **project:** _./src/2-work-queues_
 ______________________________________
 
-Open up at least two terminals and run a receiver on each one.  
-Run the receiver.js  
-`npm run receiver-2`
+To run the work queues demo:  
+`npm run demo-2`
 
-Open up one terminal and run a sender.  
-Run the sender.js  
-`npm run send-2`
+Four console windows should have appeared, one producer and three consumers.
 
-The sender will immediately send 12 tasks for the receiver to process.  
-The recievers take turns receiving the tasks in round robin order.  
-The tasks are processed in parallel.  
+The producer sends twelve tasks for the consumers to _'process'_ (timer running for 5 seconds to simulate a task being processed). 
 
-You may notice a delay between when the tasks are received and when the tasks are processed.  
+Each consumer receives 4 tasks and _'processes'_ them asynchronoulsy (at the same time).
 
-**-output-**
+Close all windows and run the demo again, but this time close a window or two before the tasks finish _'processing'_ (before you see '**_[X]_ _Done_**'. in the consumer console).
+
+You will notice that incomplete tasks are re-assigned to the remaining consumer(s).
+
+##### Example of output from processing a single task.
 > _[x]_ _Received_ 'your message'  
 >  _Processing..._  
 > **... (some delay)**  
 > _[x]_ _Done_  
 
-If we repeat the same experiment and kill one of the receiving terminals before it has a chance to finish processing the task, the task will be re-assigned to the other receiving terminal(s).  This is because acknowledge has been turned on.  Otherwise, incomplete tasks will be lost when the receiver closes.  The sender has _persistent_ set to _true_.  Otherwise, RabbitMQ will forget about the tasks it had in queue when restarted. 
-
-**Note:** _message persistence isn't strong and message can still be lost, if you absolutely cannot lose messages, use Publisher Confirms._ 
-_https://www.rabbitmq.com/confirms.html_
-
 ##### An Explaination
-> Explaination of what is happening here... (WIP)
+> We start by launching three consumers to start listening on a shared queue.  To create a shared queue, each consumer has to create/assert a queue with a static queue name (**workqueue** in this example).  If a queue is not given a name, RabbitMQ will assign a randomly generated name and each consumer will have it's own queue.  For this demo, we want the consumers to share a queue so they will compete over tasks.  Otherwise, each consumer would get the same twelve tasks, each task being 'processed' three times.  When we send messages from the producer, we set the persistent value of the message to true.  This will make sure the task is not removed from the queue until it has been acknowledged by the consumer.  Each consumer runs the task and upon completeion, it acknowledges the message to mark it for completion.  This is why the tasks get re-assigned to other consumers when a consumer is closed.  The closed consumer was unable to acknowledge the tasks.  Once closed, the unacknowledged tasks are re-assigned to the remaining open consumers.
+
+**Note:** _message persistence isn't strong and message can still be lost, if you absolutely cannot lose messages, use Publisher Confirms._  
+_https://www.rabbitmq.com/confirms.html_
 ______________________________________
 
 ## 3 Publish Subscribe  
