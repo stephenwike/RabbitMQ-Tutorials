@@ -1,4 +1,4 @@
-# RabbitMQ-Tutorials (WIP)
+# RabbitMQ-Tutorials
 #### Implementation of RabbitMQ following RabbitMQ tutorials (in javascript)
 
 This series of tutorials follows the javascript chain of tutorials from here:  
@@ -79,7 +79,7 @@ ______________________________________
 **project:** _./src/1-hello-world_
 ______________________________________
 
-To run the hello-world demo:
+To run the hello-world demo:  
 `npm run demo-1`
 
 **Note:** _Going forward, all producing scripts (script that sends messages) will be run in a green command prompt while all consuming scripts (scripts that receive messages) will be run in red command prompts.  Make sure you close all command prompt windows before moving onto another demo as having multiple unrelated windows could become confusing._
@@ -159,15 +159,3 @@ Depending on the routing info, consumers will receive a filtered list of relevan
 >Exchanges of type headers are provided as key/value paired arguments along with an **x-match** key with either values **all** or **any**.  Value 'all' will only route messages where all of the headers match the headers of the message.  Value 'any' will only route messages where at least one header matches the headers of the message.
 
 **Note:** _Headers exchange type is not implemented in this demo (as I haven't been able to get them to work in javascript)_
-______________________________________
-
-## 5 Topics
-##### Publishing to only specific queue(s).
-**project:** _./src/5-topics_
-______________________________________
-
-
-
-##### An Explaination
-> Explaination of what is happening here... (WIP)
-______________________________________
