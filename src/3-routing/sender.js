@@ -3,12 +3,10 @@ var amqp = require('amqplib/callback_api');
 const fanout_type = "fanout";
 const direct_type = "direct";
 const topic_type = "topic";
-const headers_type = "headers";
 
 const ex_fanout = fanout_type + "_exchange";
 const ex_direct = direct_type + "_exchange";
 const ex_topic = topic_type + "_exchange";
-const ex_header = headers_type + "_exchange";
 
 amqp.connect('amqp://localhost', function (error0, connection) {
     if (error0) {
@@ -22,7 +20,6 @@ amqp.connect('amqp://localhost', function (error0, connection) {
         channel.assertExchange(ex_fanout, fanout_type, { durable: false });
         channel.assertExchange(ex_direct, direct_type, { durable: false });
         channel.assertExchange(ex_topic, topic_type, { durable: false });
-        channel.assertExchange(ex_header, headers_type, { durable: false });
 
         Publish(channel, ex_fanout, fanout_type, 'doesntmatter');
 
@@ -34,11 +31,6 @@ amqp.connect('amqp://localhost', function (error0, connection) {
         Publish(channel, ex_topic, topic_type, 'example.topic.extra');
         Publish(channel, ex_topic, topic_type, 'different.longer.extended');
 
-        Publish(channel, ex_header, headers_type, 'doesntmatter');
-        Publish(channel, ex_header, headers_type, '', { headers: { 'Shared': 'all' } } );
-        Publish(channel, ex_header, headers_type, '', { headers: { Shared: 'all', Unique: 'only' } } );
-        Publish(channel, ex_header, headers_type, '',  { 'Shared': 'all', 'Unique': 'only', 'x-match': 'any' } );
-        Publish(channel, ex_header, headers_type, '', { Shared: 'all', Unique: 'only' } );
 
         console.log(" [x] Messages Sent");
     });

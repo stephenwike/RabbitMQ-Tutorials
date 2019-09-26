@@ -133,41 +133,32 @@ You will notice that incomplete tasks are re-assigned to the remaining consumer(
 _https://www.rabbitmq.com/confirms.html_
 ______________________________________
 
-## 3 Publish Subscribe  
-##### Example publish and subscribe pattern  
-**project:** _./src/3-publish-subscribe_  
-______________________________________
-
-To run the publish-subscribe example, open at least two terminals and run the receiver script in each terminal.  
-`npm run receive-3`
-
-Open one new terminal and run the sender script.  
-`npm run send-3`
-
-When prompted, type the message you would like to send to the receiver script and press enter.
-You will see the message you just sent from the sender script in all the receiver script outputs.
-
-##### An Explaination
-> Explaination of what is happening here... (WIP)
-______________________________________
-
-## 4 Routing
+## 3 Routing
 ##### Publishing to only specific queue(s).
 **project:** _./src/4-routing_  
 ______________________________________
 
-To run the routing example, open at least two terminals and run the receiver script in each terminal.  
-`npm run receive-4`
+To run the routing demo:    
+`npm run demo-3`
 
-When prompted, enter either _route1_ or _route2_ and hit _enter_.  For this demo, make sure at least one terminal was entered with _route1_ and at least one was entered with _route2_.  This will bind _route1_ or _route2_ as a routing key for the queue that the receiver script creates.  These queues are already bound with the _all_ routing key.
+Four consoles will open, 3 consumers and one producer.  Each consumer lists the routing key(s) it uses.
 
-Open one new terminal and run the sender script.  
-`npm run send-4`
+The consumer publishes 7 messages of varying type and routing info.
 
-The sender will immidiately send three direct messages.  One routing to _all_, one routing to _route1_, and one routing to _route2_.  You should see all reciever terminals display the message **this message is sent to queues with the routine key "all"**.  Receiver terminals specified with _route1_ will see **this message is sent to queues with the routine key "route1"** and receiver terminals specified with _route2_ will see **this message is sent to queues with the routine key "route2"**.
+Depending on the routing info, consumers will receive a filtered list of relevant messages.
 
 ##### An Explaination
-> Explaination of what is happening here... (WIP)
+>RabbitMQ sends messages to the queues through exchanges.  There are four types of exchanges **(fanout, direct, topic, and headers)**.  In this project our producer published seven messages from three exchanges.  One from a _'fanout'_ exchange, three from a _direct_ exchange, and three from a _topic_ exchange.  Each consumer creates a unique queue and binds that queue to all three exchanges.  
+
+>Exchanges of type fanout are sent to all queues regardless of the message.  You will see the this message on all consumers.  It uses the key _'doesntmatter'_ when publishing to show that the routing key is ignored.  
+
+>Exchanges of type direct are sent to queues where the routing key exactly matches the binding key of the queue.  In the consumer with binding key _'example.message'_, all messages exactle matching the key will be sent through the queue.  In this consumer, there is one message exactly matching this routing key from both the direct and topic exchanges.  
+
+>Exchanges of type topic are sent to queues where the routing key matches the pattern of the bound key.  routing keys are made from one or more values separated by a dot (e.g. **'val1.val2.val3'**). Bound key patterns are made with two special characters **( \* and \# )**.  The **\*** means "Exactly one of any value" and the **\#** means "Zero or more of any value" (e.g. **'\*.example.\#'** meaning accept all messages that have at least two values with the second value being equal to 'example').  In the consumer with two bound keys (you can bind as many keys to an exchange as you'd like) includes **'example.\*'** which means any routing key that has two values, the first being example, and **'\#.extended'** which means any routing key that has a last value of extended.  Notice only messages of type topic understand the special characters so no messages from exchange type direct are routed.
+
+>Exchanges of type headers are provided as key/value paired arguments along with an **x-match** key with either values **all** or **any**.  Value 'all' will only route messages where all of the headers match the headers of the message.  Value 'any' will only route messages where at least one header matches the headers of the message.
+
+**Note:** _Headers exchange type is not implemented in this demo (as I haven't been able to get them to work in javascript)_
 ______________________________________
 
 ## 5 Topics

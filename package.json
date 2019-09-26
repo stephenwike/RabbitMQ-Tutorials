@@ -21,7 +21,7 @@
 
     "demo-1": "npm run send-1 && npm run receive-1",
     "demo-2": "npm run receive-2 && npm run receive-2 && npm run receive-2 && npm run send-2",
-    "demo-3": "npm run receive-3 \" && npm run receive-3 example.message\" && npm run receive-3 example.* #.extended\" && npm run receive-3 Headers\" && npm run send-3"
+    "demo-3": "npm run receive-3 \" && npm run receive-3 example.message\" && npm run receive-3 example.* #.extended\" && npm run send-3"
   },
   "repository": {
     "type": "git",
